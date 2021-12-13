@@ -14,9 +14,12 @@ private EmployeeRepository employeeRepository;
 	
 	public List<Employee> getAllEmployee(){
 		
+		List<Employee> employeeList = new ArrayList<Employee>();
 		long count = employeeRepository.count();
-		return new ArrayList<Employee>(employeeRepository.findAll());
-		
+	    for(int i=0;i<count;i++){
+			employeeList.add(employeeRepository.findAll().get(i));
+		}
+		return employeeList;
 	}
 	
 	public Employee getEmployee(String id) {

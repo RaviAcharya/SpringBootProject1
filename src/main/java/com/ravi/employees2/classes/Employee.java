@@ -1,28 +1,36 @@
 package com.ravi.employees2.classes;
 
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.time.LocalDate;
+import java.util.Date;
 
-@Document(collation="employee")
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.annotation.Id;
+
+@EntityScan
 public class Employee {
 	@Id
 	private String employeeId;
 	private  String name;
 	private  int age;
 	private  String emailId;
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dateOfJoining;
 	public Employee() {
 		super();
-	
+
 	}
 
-	public Employee(String employeeId, String name, int age, String emailId) {
+	public Employee(String employeeId, String name, int age, String emailId,Date dateOfJoining) {
 		super();
 		this.employeeId = employeeId;
 		this.name = name;
 		this.age = age;
 		this.emailId = emailId;
+		this.dateOfJoining=dateOfJoining;
 	}
 
 	public String getEmployeeId() {
@@ -39,6 +47,9 @@ public class Employee {
 
 	public String getEmailId() {
 		return emailId;
+	}
+	public Date getDate(){
+		return dateOfJoining;
 	}
 
 	@Override
